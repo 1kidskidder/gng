@@ -1,168 +1,258 @@
-local library = loadstring(game:HttpGet("https://pastebin.com/raw/tqKTJQAA",true))();
-local run = game:service("RunService");
-local runcon;players=game:service("Players");
-player=players.LocalPlayer;camera=workspace.CurrentCamera;
-local uis=game:service("UserInputService");
-local curc;
-local mouse=player:GetMouse();
-local toggles={abk=Enum.UserInputType.MouseButton2;iag=false;};local traced={};local tsp=Vector2.new(camera.ViewportSize.X / 2, camera.ViewportSize.Y / 2 + 400);local gs=game:GetService("GuiService"):GetGuiInset();local sc=Vector2.new(camera.ViewportSize.X/2,camera.ViewportSize.Y/2);local mousemoverel = mousemoverel or Input.MoveMouse;local hookfunction = hookfunction or detour_function or replaceclosure;local getnamecallmethod=getnamecallmethod or get_namecall_method;
-local combat = library:CreateWindow('Aimbot');
-local visuals = library:CreateWindow('Visuals');
-visuals:Section('ESP');
-visuals:Toggle('Tracers', {location = toggles,flag = "tracers"})
-visuals:Toggle('Name ESP' ,{location = toggles ,flag = "nESP"});
-visuals:Toggle('Arrow ESP' ,{location = toggles ,flag = "hESP"});
-combat:Section('Aimbot')
-combat:Toggle('Aimbot',{location=toggles,flag='aimbot'});
-combat:Bind('Aimbot Hotkey', {location=toggles, flag='abk', kbonly=false, default=Enum.UserInputType.MouseButton2},
-function(k,b)
-    toggles.iag=b;
-end);
-combat:Dropdown('Aimpart', {location=toggles,flag='abp', list={"Head","UpperTorso","LowerTorso","HumanoidRootPart"}});
-combat:Toggle('Draw FOV circle', {location=toggles, flag='showfov'})
-combat:Toggle('Filled FOV circle', {location=toggles, flag='filled'})
-combat:Slider('FOV', {location=toggles, flag='fov', precise=false, default=50, min=120, max=500});
-function createline()
-	local a=Drawing.new("Line");a.Thickness=1.5;a.Transparency=1;a.Visible=true;a.Color=Color3.fromRGB(207, 159, 255);
-    a.From=tsp;
-    return a;
-end;
-function createname(text)
-    local a=Drawing.new("Text");a.Transparency=1;a.Visible=true;a.Color=Color3.fromRGB(0,240,90);a.Text=text;a.Size=15;
-    return a;   
-end;
-function createcircle()
-    local a=Drawing.new('Circle');a.Transparency=0.3;a.Thickness=1.5;a.Visible=true;a.Color=Color3.fromRGB(207, 159, 255);a.Filled=false;a.Radius=toggles.fov;
-    return a;
-end;
-function()loadstring(game:HttpGet("https://raw.githubusercontent.com/Eazvy/UILibs/main/ESP/Arrows/Example",true))()
-    return a;
-end;
-curc=createcircle();
-function isInTeam(char)
-	if player and players:GetPlayerFromCharacter(char) and players:GetPlayerFromCharacter(char).Team and player.Team then
-		if player.FriendlyFire.Value then
-			return false;
-		else
-			return (player.Team==players:GetPlayerFromCharacter(char).Team);
-		end;	
-	end;
-end;
-local gc = function()
-	local nearest = math.huge
-	local nearplr;
-	for i,v in pairs(players:GetPlayers()) do
-		if v ~= player and v.Character and not isInTeam(v.Character) and v.Character:FindFirstChild(toggles.abp) then
-			local pos = camera:WorldToScreenPoint(v.Character[toggles.abp].Position)
-			local diff = math.sqrt((pos.X - sc.X)^2 + (pos.Y+gs.Y - sc.Y)^2)
-			if diff < nearest and diff < toggles.fov then
-				nearest=diff;
-				nearplr=v;
-			end
-		end;
-	end;
-	return nearplr
-end;
-local getrel = function(x, y)
-	local newy;
-	local newy;
-	if x > sc.X then
-		newx = -(sc.X - x)
-		newx = newx/5
-	else
-		newx = x - sc.X
-		newx = newx/5
-	end;
-	if y > sc.Y then
-		newy = -(sc.Y - y)
-		newy = newy/5
-	else
-		newy = y - sc.Y
-		newy = newy/5
-	end;
-	return newx, newy
-end;
+getgenv().Elysian = {
+    ['Main'] = {
+        ['Lock'] = {
+            ['Prediction'] = {
+                ['Enabled'] = true,
+                ['Method'] = "Multiplication",
+                ['Division'] = {
+                    ['X'] = 1.0,
+                    ['Y'] = 1.0
+                },
+                ['Multiplication'] = {
+                    ['Value'] = 0.14728054792824583
+                },
+                ['Auto Prediction'] = {
+                    ['Enabled'] = true,
+                    ['Config'] = {
+                        ['50'] = 0.12758545757236864,
+                        ['60'] = 0.12593338424986178,
+                        ['70'] = 0.1416310605747206,
+                        ['80'] = 0.1441481061236737,
+                        ['90'] = 0.14306050263254388,
+                        ['100'] = 0.14698413210558095,
+                        ['110'] = 0.14528324362031425,
+                        ['120'] = 0.14556534594403,
+                        ['130'] = 0.14614337395777216,
+                        ['140'] = 0.14645603036905414,
+                        ['150'] = 0.14736848095666674,
+                        ['160'] = 0.14696985547996216
+                    }
+                }
+            },
+            ['Offset'] = {
+                ['Jump'] = -2
+            },
+            ['Part'] = "LowerTorso",
+            ['Checks'] = {
+                ['K.O'] = true,
+                ['Grabbed'] = true
+            }
+        },
+        ['Camera'] = {
+            ['Smoothing'] = {
+                ['Enabled'] = false,
+                ['Amount'] = 0.11
+            }
+        }
+    },
+    ['Rage'] = {
+        ['Strafe'] = {
+            ['Enabled'] = true,
+            ['Speed'] = 100,
+            ['Distance'] = 10,
+            ['Height'] = 10
+        },
+        ['Cframe'] = {
+            ['Enabled'] = true,
+            ['Amount'] = 5
+        }
+    },
+    ['Auto'] = {
+        ['Shoot'] = true
+    },
+    ['Visuals'] = {
+        ['Box Target'] = true,
+        ['Target Tracer'] = true,
+        ['Colors'] = {
+            ['Box'] = Color3.fromRGB(255, 255, 255),
+            ['Tracer'] = Color3.fromRGB(255, 255, 255)
+        }
+    }
+}
 
-run.Stepped:Connect(function()
-    spawn(function()
-        for i,v in pairs(players:GetChildren()) do
-            if v.Character and v.Character:FindFirstChild(toggles.abp) and (not isInTeam(v.Character)) and (toggles.tracers or toggles.nESP or toggles.hESP) then
-                if not traced[v.Name] then
-                    traced[v.Name]={v.Character};    
-                end;  
-                local vector, onScreen= camera:WorldToScreenPoint(v.Character[toggles.abp].Position)
-                if toggles.tracers then
-                    if traced[v.Name][2] then
-                        traced[v.Name][2].Visible=(onScreen and toggles.tracers);traced[v.Name][2].To=Vector2.new(vector.X, vector.Y+gs.Y);	
-                    else
-                        traced[v.Name][2]=createline();traced[v.Name][2].Visible=(onScreen and toggles.tracers);traced[v.Name][2].To=Vector2.new(vector.X, vector.Y+gs.Y);
-                    end;
-                end;
-                if toggles.nESP then    
-                    if traced[v.Name][3] then
-                        traced[v.Name][3].Visible=(onScreen and toggles.nESP);traced[v.Name][3].Position=Vector2.new(vector.X, vector.Y+(gs.Y/2));	
-                    else
-                        traced[v.Name][3]=createname(v.Name);traced[v.Name][3].Visible=(onScreen and toggles.nESP);traced[v.Name][3].Position=Vector2.new(vector.X, vector.Y+(gs.Y/2));
-                    end;   
-				end;
-				if toggles.hESP then
-					if traced[v.Name][4] then
-                        traced[v.Name][4].Visible=(onScreen and toggles.hESP);traced[v.Name][4].Size=Vector2.new(1400/vector.Z,1400/vector.Z);traced[v.Name][4].Position=Vector2.new((vector.X)-traced[v.Name][4].Size.X/2, (vector.Y+(gs.Y))-traced[v.Name][4].Size.Y/2);
-                    else
-                        traced[v.Name][4]=createsquare();traced[v.Name][4].Visible=(onScreen and toggles.hESP);traced[v.Name][4].Size=Vector2.new(1400/vector.Z,1400/vector.Z);traced[v.Name][4].Position=Vector2.new((vector.X)-traced[v.Name][4].Size.X/2, (vector.Y+(gs.Y))-traced[v.Name][4].Size.Y/2);
-                    end; 
-				end		
+local userInputService = game:GetService("UserInputService")
+local replicatedStorage = game:GetService("ReplicatedStorage")
+local players = game:GetService("Players")
+local runService = game:GetService("RunService")
+local client = players.LocalPlayer
+local camera = workspace.CurrentCamera
+local CoreGui = game:GetService("CoreGui")
+local HttpService = game:GetService("HttpService")
+
+local Locking = false
+local Plr = nil
+local strafing = false
+local cframing = false
+local auto_shooting = false
+
+local playerData = {}
+local SMOOTHNESS_FACTOR = 2
+
+local function GetEvent()
+    for _, v in pairs(game.ReplicatedStorage:GetChildren()) do
+        if v.Name == "MainEvent" or v.Name == "Bullets" or v.Name == ".gg/untitledhood" or v.Name == "Remote" or v.Name == "MAINEVENT" or v.Name == ".gg/flamehood" then
+            return v
+        end
+    end
+end
+
+local function GetArgs()
+    local PlaceId = game.PlaceId
+    if PlaceId == 2788229376 or PlaceId == 4106313503 or PlaceId == 11143225577 or PlaceId == 17319408836 or PlaceId == 18110728826 then
+        return "UpdateMousePosI"
+    elseif PlaceId == 5602055394 or PlaceId == 7951883376 then
+        return "MousePos"
+    elseif PlaceId == 10100958808 or PlaceId == 12645617354 or PlaceId == 14171242539 or PlaceId == 14412436145 or PlaceId == 14412355918 or PlaceId == 14413720089 or PlaceId == 17403265390 or PlaceId == 17403166075 or PlaceId == 17403262882 or PlaceId == 15186202290 or PlaceId == 15763494605 then
+        return "MOUSE"
+    elseif PlaceId == 9825515356 then
+        return "MousePosUpdate"
+    elseif PlaceId == 15166543806 then
+        return "MoonUpdateMousePos"
+    elseif PlaceId == 16033173781 or PlaceId == 7213786345 then
+        return "UpdateMousePosI"
+    else
+        return "UpdateMousePos"
+    end
+end
+
+local mainEvent = GetEvent()
+
+function GetClosestToCenter()
+    local closestDist = math.huge
+    local closestPlr = nil
+    local screenCenter = Vector2.new(camera.ViewportSize.X / 2, camera.ViewportSize.Y / 2)
+    
+    for _, v in ipairs(players:GetPlayers()) do
+        if v ~= client and v.Character and v.Character:FindFirstChild("HumanoidRootPart") then
+            local screenPos, onScreen = camera:WorldToViewportPoint(v.Character.HumanoidRootPart.Position)
+            if onScreen then
+                local distToCenter = (Vector2.new(screenPos.X, screenPos.Y) - screenCenter).Magnitude
+                if distToCenter < closestDist then
+                    closestPlr = v
+                    closestDist = distToCenter
+                end
+            end
+        end
+    end
+    return closestPlr
+end
+
+local function getPart()
+    if not Plr or not Plr.Character then
+        return nil
+    end
+
+    local humanoid = Plr.Character:FindFirstChild("Humanoid")
+    if not humanoid then
+        return nil
+    end
+
+    if humanoid:GetState() == Enum.HumanoidStateType.Freefall and getgenv().Elysian.Main.Lock.Prediction.Enabled then
+        local airshotPart = Plr.Character:FindFirstChild(getgenv().Elysian.Main.Lock.Part)
+        if airshotPart then
+            return airshotPart
+        end
+    end
+
+    local targetPart = Plr.Character:FindFirstChild(getgenv().Elysian.Main.Lock.Part)
+    if targetPart then
+        return targetPart
+    end
+
+    return Plr.Character:FindFirstChild("HumanoidRootPart")
+end
+
+local function getPredictionValue()
+    if getgenv().Elysian.Main.Lock.Prediction['Auto Prediction']['Enabled'] then
+        local ping = math.floor(game:GetService("Stats").Network.ServerStatsItem["Data Ping"]:GetValue())
+        local pingTable = getgenv().Elysian.Main.Lock.Prediction['Auto Prediction'].Config
+        
+        for i = ping, 0, -1 do
+            if pingTable[tostring(i)] then
+                return pingTable[tostring(i)]
+            end
+        end
+        
+        return pingTable['100']
+    else
+        return getgenv().Elysian.Main.Lock.Prediction.Multiplication.Value
+    end
+end
+
+local function calculatePosition(Position, velocity)
+    local method = getgenv().Elysian.Main.Lock.Prediction.Method
+
+    if method == "Division" then
+        local divisionSettings = getgenv().Elysian.Main.Lock.Prediction.Division
+        return Position + (velocity / Vector3.new(divisionSettings.X, divisionSettings.Y, divisionSettings.X))
+    elseif method == "Multiplication" then
+        local multiplicationValue = getgenv().Elysian.Main.Lock.Prediction.Multiplication.Value
+        return Position + (velocity * multiplicationValue)
+    end
+end
+
+local function AutoShoot()
+    if Locking and Plr then
+        local character = client.Character
+        if character then
+            local tool = character:FindFirstChildOfClass("Tool")
+            if tool and tool:IsA("Tool") then
+                tool:Activate()
+            end
+        end
+    end
+end
+
+runService.Heartbeat:Connect(function(dT)
+    for _, player in ipairs(players:GetPlayers()) do
+        if player ~= client then
+            Process(player, dT)
+        end
+    end
+
+    if getgenv().Elysian.Rage.Strafe.Enabled and Locking and strafing and Plr and Plr.Character then
+        local targetHRP = Plr.Character:FindFirstChild("HumanoidRootPart")
+        if targetHRP then
+            strafeAngle = strafeAngle + math.rad(getgenv().Elysian.Rage.Strafe.Speed)
+            
+            local distance = getgenv().Elysian.Rage.Strafe.Distance
+            local height = getgenv().Elysian.Rage.Strafe.Height
+            
+            local offsetX = math.sin(strafeAngle) * distance
+            local offsetZ = math.cos(strafeAngle) * distance
+            local offsetY = math.sin(strafeAngle * 2) * height
+            
+            local predictedPosition = calculatePosition(targetHRP.Position, playerData[Plr].Velocity)
+            local strafePosition = predictedPosition + Vector3.new(offsetX, offsetY, offsetZ)
+            
+            if client.Character and client.Character:FindFirstChild("HumanoidRootPart") then
+                client.Character.HumanoidRootPart.CFrame = CFrame.new(strafePosition, predictedPosition)
+            end
+        end
+    end
+
+    if cframing and getgenv().Elysian.Rage.Cframe.Enabled and client.Character and client.Character:FindFirstChild("Humanoid") and client.Character:FindFirstChild("HumanoidRootPart") then
+        local hrp = client.Character.HumanoidRootPart
+        local moveDirection = client.Character.Humanoid.MoveDirection
+        hrp.CFrame = hrp.CFrame + (moveDirection * getgenv().Elysian.Rage.Cframe.Amount)
+    end
+
+    if auto_shooting then
+        AutoShoot()
+    end
+end)
+
+runService.RenderStepped:Connect(function()
+    if Locking and Plr and Plr.Character and playerData[Plr] then
+        local Part = getPart()
+        if Part then
+            local Position = calculatePosition(Part.Position, playerData[Plr].Velocity)
+            local Main = CFrame.new(camera.CFrame.p, Position)
+            
+            if getgenv().Elysian.Main.Camera.Smoothing.Enabled then
+                camera.CFrame = camera.CFrame:Lerp(Main, getgenv().Elysian.Main.Camera.Smoothing.Amount)
             else
-                if traced[v.Name] then
-                    if traced[v.Name][2] then
-                        traced[v.Name][2]:Remove();traced[v.Name][2]=nil;
-                    end;   
-                    if traced[v.Name][3] then
-                        traced[v.Name][3]:Remove();traced[v.Name][3]=nil;
-					end
-					if traced[v.Name][4] then
-                        traced[v.Name][4]:Remove();traced[v.Name][4]=nil;
-                    end
-                end;   
-            end;    
-        end;       
-    end);
-    spawn(function()
-        if toggles.showfov then
-            curc.Visible=true;curc.Position = UDim2.new(1, -55, 0.5, -10);curc.Radius=toggles.fov;
-        else
-            curc.Visible=false;
-        end;    
-    end);
-    spawn(function()
-        if toggles.filled then
-            toggles.showfov = true
-            curc.Filled = true
-        else
-            curc.Filled = false
-        end 
-    end)
-    spawn(function()
-        if toggles.aimbot and toggles.iag then
-            if gc()~=nil and gc().Character:FindFirstChild(toggles.abp) then
-                local pos=camera:WorldToScreenPoint(gc().Character[toggles.abp].Position)
-                local x,y=getrel(pos.X, pos.Y+gs.Y)
-                mousemoverel(x,y)
-            end;
-        end;    
-    end);   
-end);    
-local fr;
-players.PlayerRemoving:Connect(function(p)
-    if traced[p.Name] then 
-        if traced[p.Name][2] then 
-            traced[p.Name][2]:Remove();traced[p.Name][2]=nil;
-        end;
-        if traced[p.Name][3] then
-             traced[p.Name][3]:Remove();traced[p.Name][3]=nil;
-            end;
-            if traced[p.Name][4] then 
-                traced[p.Name][4]:Remove();traced[p.Name][4]=nil;
-            end;traced[p.Name]=nil;
-        end;
-    end);
+                camera.CFrame = Main
+            end
+        end
+    end
