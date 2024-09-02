@@ -384,9 +384,6 @@ end
 -- // Silent Aim Function
 getClosestPlayerToCenter()
     local centerScreenPosition = Vector2.new(workspace.CurrentCamera.ViewportSize.X / 2, workspace.CurrentCamera.ViewportSize.Y / 2  - (game:GetService("GuiService"):GetGuiInset().Y/2))
-    local closestPlayer
-    local closestDistance = math.huge
-    local localPlayer = game.Players.LocalPlayer
 
     -- // Vars
     local TargetPart = nil
