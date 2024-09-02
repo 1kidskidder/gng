@@ -3,7 +3,7 @@ getgenv().SilentAim = {
 		Enabled = true,
 		AimPart = "Head",
 		Prediction = 0.1365,
-		WallCheck = true
+		WallCheck = false
 	},
 	FOV = {
 		Enabled = true,
